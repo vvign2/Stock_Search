@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="stock">
+  <head>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+  
+  </head>
+
+    <style>
+    ul
+{
+    list-style-type: none;
+}
+    </style>
+    
+  <body>
+    
+       <div ng-controller="StockCtrl" >
+       
+     
+          Enter Stock Code  : 
+     <input type="text" ng-model="stock1"  />
+    <button class="btn btn-default" ng-click= "mySubmit()">Get Data</button>
+     
+            <h3 ng-show="data.query.results.quote">{{data.query.results.quote.symbol | uppercase}} -
+           {{data.query.created | date:'yyyy-MM-dd'}} -
+                {{data.query.results.quote.Name}} </h3>
+           <br>
+<table id="table1" class="table table-hover">   
+        <tbody>
+            <tr ng-show="data.query.results.quote">
+                <th >Previous Close: 
+               <span style="display:inline-block; width:200px;"></span>                     {{data.query.results.quote.PreviousClose}}</th> </tr>
+             <tr ng-show="data.query.results.quote">
+                 <th >Open: 
+              <span style="display:inline-block; width:258px;"></span>   
+                     {{data.query.results.quote.Open}}</th> </tr>
+            <tr ng-show="data.query.results.quote">
+                <th >Bid: 
+                      <span style="display:inline-block; width:265px;"></span>  
+                    {{data.query.results.quote.Bid}}</th> </tr>
+             <tr ng-show="data.query.results.quote">
+                 <th >Ask:   <span style="display:inline-block; width:265px;"></span>  
+                     {{data.query.results.quote.Ask}}</th> </tr>
+              <tr ng-show="data.query.results.quote">
+                <th >One Year Target Price :   <span style="display:inline-block; width:145px;"></span>  
+                    {{data.query.results.quote.OneyrTargetPrice}}</th> </tr>
+             <tr ng-show="data.query.results.quote">
+                 <th >Year Low:   
+                     <span style="display:inline-block; width:230px;"></span>  
+                     {{data.query.results.quote.YearLow}}</th> </tr>
+            <tr ng-show="data.query.results.quote">
+                 <th >Year High:   
+                     <span style="display:inline-block; width:230px;"></span>  {{data.query.results.quote.YearHigh}}</th> </tr>
+            
+            
+    
+    </table>        
+        <button ng-show="data.query.results.quote" class="btn btn-default"
+              ng-click= "mySubmit1()" ng-csv="getArray" csv-header="['Key', 'Value']" filename="summary.csv" >Export Summary to CSV</button>
+   
+           
+           
+      </div>
+               
+     
+
+      <script src="js/angular.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-csv/0.3.6/ng-csv.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
